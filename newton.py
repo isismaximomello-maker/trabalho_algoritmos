@@ -73,7 +73,7 @@ def estimarErro(valor_anterior, valor_atual):
 # Estima o erro pela diferença entre duas aproximações
     return abs(valor_atual - valor_anterior)
 
-def main():
+def chamarNewton():
 
     pontos = []
 
@@ -119,6 +119,6 @@ def main():
     print(f"\nE({x_avaliar}) = |P{grau_atual} - P{grau_anterior}|")
     print(f"E({x_avaliar}) = {erro}")
 
-main()
+
 
 # fim newton
