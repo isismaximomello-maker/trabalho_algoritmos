@@ -1,5 +1,7 @@
 import lagrange
 import newton
+import compara
+
 
 
 def main():
@@ -7,7 +9,8 @@ def main():
         print("deseja realizar qual metodo:")
         print("1:lagrange")
         print("2:newton")
-        print("3:sair")
+        print("3:comparar metodos")
+        print("4:sair")
 
         escolha = int(input())
 
@@ -17,8 +20,11 @@ def main():
         elif escolha==2:
             newton.chamarNewton()
         
-        elif escolha == 3:
+        elif escolha == 4:
             return False
+        
+        elif escolha == 3:
+            compara.comparar_metodos()
         else:
             print("opcao invalida")
 

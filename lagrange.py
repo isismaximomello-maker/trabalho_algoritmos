@@ -80,26 +80,33 @@ def avaliar_polinomio(coeficientes, valor_x):
     return round(resultado, 4)
 
 
+# lagrange.py - função estimar_erro modificada
+
 def estimar_erro(x, y, valor_x):
     """
-    estima o erro em lagrange
+    estima o erro em lagrange usando um ponto a menos
+    Compara P(x) com todos os pontos vs P(x) com n-1 pontos
     """
     n = len(x)
     
-    produto = 1.0
-    for i in range(n):
-        produto = produto * (valor_x - x[i])
+    # Se tiver menos de 3 pontos, não dá para estimar erro
+    if n < 3:
+        return 0.0
     
-    max_variacao = 0.0
-    for i in range(n - 1):
-        variacao = abs(y[i + 1] - y[i]) / abs(x[i + 1] - x[i])
-        if variacao > max_variacao:
-            max_variacao = variacao
+    # 1. Constrói polinômio com TODOS os pontos
+    coef_completo = construir_lagrange(x, y)
+    resultado_completo = avaliar_polinomio(coef_completo, valor_x)
     
-    erro = abs(max_variacao * produto)
+    # 2. Constrói polinômio com UM PONTO A MENOS (remove o último)
+    x_menos = x[:-1]  # remove o último x
+    y_menos = y[:-1]  # remove o último y
+    coef_menos = construir_lagrange(x_menos, y_menos)
+    resultado_menos = avaliar_polinomio(coef_menos, valor_x)
+    
+    # 3. O erro é a diferença entre os dois resultados
+    erro = abs(resultado_completo - resultado_menos)
     
     return round(erro, 4)
-
 
 def mostrar_polinomio(coeficientes):
     """
